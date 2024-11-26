@@ -1,37 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up and Login</title>
+    <title>Login and Sign Up</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <h2>Sign Up</h2>
-    <form id="signupForm">
-        <label for="signupEmail">Email:</label>
-        <input type="email" id="signupEmail" name="email" required>
-
-        <label for="signupPassword">Password:</label>
-        <input type="password" id="signupPassword" name="password" required>
-
-        <button type="submit">Sign Up</button>
-    </form>
-
-    <h2>Login</h2>
-    <form id="loginForm">
-        <label for="loginEmail">Email:</label>
-        <input type="text" id="loginEmail" name="email">
-
-        <label for="loginPassword">Password:</label>
-        <input type="text" id="loginPassword" name="password">
-
-        <button type="submit">Login</button>
-    </form>
-
+    <div class="container">
+        <div class="form-container">
+            <h1 id="formTitle">Login Form</h1>
+            <div class="tabs">
+                <button id="loginTab" class="active">Login</button>
+                <button id="signupTab">Signup</button>
+            </div>
+            <form id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Email Address" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+              
+                <button type="submit" class="submit-btn">Login</button>
+                <p class="signup-text">Not a member? <a href="#" id="signupLink">Signup now</a></p>
+            </form>
+            <form id="signupForm" style="display: none;">
+                <input type="email" id="signupEmail" placeholder="Email Address" required>
+                <input type="password" id="signupPassword" placeholder="Password" required>
+                <button type="submit" class="submit-btn">Sign Up</button>
+                <p class="login-text">Already have an account? <a href="#" id="loginLink">Login</a></p>
+            </form>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
-
 </html>
