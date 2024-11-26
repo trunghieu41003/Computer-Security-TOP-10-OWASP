@@ -113,8 +113,41 @@ const logout = (req, res) => {
     });
 };
 
+const authenticateAdmin = (req, res, next) => {
+    // Assume the JWT is passed in Authorization header as Bearer token
+    const token = req.headers['authorization'] && req.headers['authorization'].split(' ')[1];
+    if (!token) return res.status(401).json({ message: 'Token not provided' });
+
+    // Verify token and check if the user is an admin
+    jwt.verify(token, 'secret_key', (err, user) => {
+        if (err) return res.status(403).json({ message: 'Forbidden' });
+        if (user.role !== 'admin') return res.status(403).json({ message: 'Access denied: Admins only' });
+
+        req.user = user; // Attach user info to request object
+        next();
+    });
+};
+const authenticateUser = async (req, res, next) => {
+    const { token } = req.body;
+
+    if (!token) {
+        return res.status(401).json({ message: 'Access token required' });
+    }
+
+    try {
+        const user = jwt.verify(token, 'secret_key');
+        req.user = user; // Attach user info to the request
+        next(); // Proceed to the next middleware
+    } catch (err) {
+        return res.status(403).json({ message: 'Invalid or expired token' });
+    }
+};
+
+
 module.exports = {
     signUp,
     logIn,
     logout,
+    authenticateAdmin,
+    authenticateUser
 };
