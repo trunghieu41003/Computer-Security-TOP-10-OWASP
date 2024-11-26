@@ -51,3 +51,73 @@ async function logIn(event) {
 // Gán sự kiện submit cho form đăng ký và đăng nhập
 document.getElementById('signupForm').addEventListener('submit', signUp);
 document.getElementById('loginForm').addEventListener('submit', logIn);
+// Toggle between login and signup forms
+document.getElementById('signupLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('signupForm').style.display = 'flex';
+    document.getElementById('loginTab').classList.remove('active');
+    document.getElementById('signupTab').classList.add('active');
+});
+
+document.getElementById('loginLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById('signupForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'flex';
+    document.getElementById('signupTab').classList.remove('active');
+    document.getElementById('loginTab').classList.add('active');
+});
+
+document.getElementById('loginTab').addEventListener('click', function() {
+    document.getElementById('signupForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'flex';
+    this.classList.add('active');
+    document.getElementById('signupTab').classList.remove('active');
+});
+
+document.getElementById('signupTab').addEventListener('click', function() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('signupForm').style.display = 'flex';
+    this.classList.add('active');
+    document.getElementById('loginTab').classList.remove('active');
+});
+
+// Hàm cập nhật tiêu đề của thẻ h1
+function updateFormTitle(title) {
+    document.getElementById('formTitle').textContent = title;
+}
+
+// Toggle giữa các form login và signup
+document.getElementById('signupLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('signupForm').style.display = 'flex';
+    document.getElementById('loginTab').classList.remove('active');
+    document.getElementById('signupTab').classList.add('active');
+    updateFormTitle("Signup Form"); // Cập nhật thẻ h1
+});
+
+document.getElementById('loginLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById('signupForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'flex';
+    document.getElementById('signupTab').classList.remove('active');
+    document.getElementById('loginTab').classList.add('active');
+    updateFormTitle("Login Form"); // Cập nhật thẻ h1
+});
+
+document.getElementById('loginTab').addEventListener('click', function() {
+    document.getElementById('signupForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'flex';
+    this.classList.add('active');
+    document.getElementById('signupTab').classList.remove('active');
+    updateFormTitle("Login Form"); // Cập nhật thẻ h1
+});
+
+document.getElementById('signupTab').addEventListener('click', function() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('signupForm').style.display = 'flex';
+    this.classList.add('active');
+    document.getElementById('loginTab').classList.remove('active');
+    updateFormTitle("Signup Form"); // Cập nhật thẻ h1
+});

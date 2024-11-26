@@ -1,5 +1,9 @@
 const jwt = require('jsonwebtoken');
+const express = require('express');
+const app = express();
 
+app.use(express.json()); // Middleware để parse JSON body
+app.use(express.urlencoded({ extended: true })); // Middleware để parse form data
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1]; // Lấy token sau "Bearer"
