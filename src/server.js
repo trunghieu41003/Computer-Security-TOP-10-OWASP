@@ -1,11 +1,10 @@
 
-
-
 const express = require('express')
 const userRoutes = require('./routes/auth.route'); // Import routes cho người dùng
 const authMiddleware = require('./midddleware/jwt');
 const path = require('path');
 const app = express()
+require('dotenv').config();
 const cors = require('cors'); // Import cors
 app.use(cors());
 
@@ -21,8 +20,8 @@ app.use('/', userRoutes); // Tất cả các route liên quan đến người d�
 
 // Lắng nghe trên cổng 3000 và hiển thị thông báo xác nhận
 app.listen(3000, '0.0.0.0', () => {
-    console.log('Server is running on http://0.0.0.0:3000');
-  });
-  
+  console.log('Server is running on http://0.0.0.0:3000');
+});
+
 
 
