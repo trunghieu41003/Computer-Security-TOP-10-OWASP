@@ -686,14 +686,16 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-    <script >
+    <script>
         let token = localStorage.getItem('jwtToken')
         async function authenticateAdmin(event) {
             try {
                 const response = await fetch('http://localhost:3000/admin', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ token })
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorization': `Bearer ${token}`  // Adding the JWT token in the Authorization header
+                    }
                 });
                 const data = await response.json();
                 console.log(data)
@@ -701,11 +703,12 @@
                     alert(data.message);
                 } else {
                     alert(data.message);
+                    window.location.href = "user.html"
                 }
             } catch (error) {
                 console.error('Lỗi:', error);
             }
-        }authenticateAdmin()
+        } authenticateAdmin()
     </script>
 
 </body>

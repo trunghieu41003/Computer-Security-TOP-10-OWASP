@@ -19,8 +19,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', userRoutes); // Tất cả các route liên quan đến người dùng sẽ bắt đầu với /users
 
 // Lắng nghe trên cổng 3000 và hiển thị thông báo xác nhận
-app.listen(3000, '0.0.0.0', () => {
-  console.log('Server is running on http://0.0.0.0:3000');
+app.listen(3000, () => {
+  console.log('Server is running on http://localhost:3000');
 });
 
 

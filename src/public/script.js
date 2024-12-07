@@ -40,6 +40,7 @@ async function logIn(event) {
         const data = await response.json();
         if (response.ok) {
             localStorage.setItem('jwtToken',data.token)
+            window.location.href="user.html"
             alert('Đăng nhập thành công!');
         } else {
             alert(`Đăng nhập thất bại: ${data.message}`);
