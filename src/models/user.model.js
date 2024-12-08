@@ -18,7 +18,20 @@ const createUser = (userData) => {
 };
 
 
-// Prevent SQL Injection
+// //A02 Cryptographic Failures
+// const findUserByEmail = (email) => {
+//     return new Promise((resolve, reject) => {
+//         connection.query('SELECT * FROM User WHERE email = ?', [email], (err, results) => {
+//             if (err) {
+//                 return reject(err);
+//             }
+//             resolve(results[0]);
+//         });
+//     });
+// };
+
+
+//A02 Cryptographic Failures
 const findUserByEmail = (email) => {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM user WHERE email = ?', [email], (err, results) => {
@@ -30,21 +43,30 @@ const findUserByEmail = (email) => {
     });
 };
 
-
-// SQL Injection
-// const findUserByEmail = (email, password) => {
+// //SQL Injection
+// const findUser = (email, password) => {
 //     return new Promise((resolve, reject) => {
-//         // Truy vấn trực tiếp ghép chuỗi, không sử dụng `?` hoặc bất kỳ phương thức bảo mật nào
 //         const query = `SELECT * FROM user WHERE email = '${email}' AND password = '${password}'`;
-
 //         connection.query(query, (err, results) => {
 //             if (err) {
 //                 return reject(err);
 //             }
-//             resolve(results);
+//             resolve(results[0]);
 //         });
 //     });
 // };
+
+//Prevent SQL Injection
+const findUser = (email, password) => {
+    return new Promise((resolve, reject) => {
+        connection.query('SELECT * FROM User WHERE email = ? AND password = ?', [email, password], (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            resolve(results[0]);
+        });
+    });
+};
 
 
 // (A04) update login attempts function 
@@ -66,5 +88,6 @@ const findUserByEmail = (email) => {
 module.exports = {
     createUser,
     findUserByEmail,
+    findUser,
     // updateLoginAttempts,
 };
