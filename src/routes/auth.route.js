@@ -26,7 +26,7 @@ router.post('/users/logout', (req, res) => {
 router.get("/admin", (req, res) => {
     res.status(200).json({ message: 'Welcome Admin' });
 });
-router.get("/user", authenticateUser, (req,res) =>{
+router.get("/user", authenticateUser, (req, res) => {
     res.status(200).json({ message: 'Welcome User', user: req.user });
 })
 // router.get('/protected-resource', authenticateToken, (req, res) => {

@@ -1,5 +1,9 @@
+Before you run code, you need to install node_module - npm install
+and set the env file to connect your database
+
 .env file
 HOST_NAME_DB=
 USER_NAME_DB=
 PASSWORD_DB=
 DATABASE_NAME_DB=
+PORT_DB= 
