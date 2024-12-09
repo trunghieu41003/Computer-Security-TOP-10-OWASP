@@ -36,6 +36,8 @@ async function logIn(event) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
         });
+        //A05 expose information on url
+        // const response = await fetch(`http://localhost:3000/users/login?email=${email}&password=${password}`)
 
         const data = await response.json();
         if (response.ok) {
