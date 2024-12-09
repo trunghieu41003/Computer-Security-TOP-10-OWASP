@@ -17,20 +17,6 @@ const createUser = (userData) => {
     });
 };
 
-
-// //A02 Cryptographic Failures
-// const findUserByEmail = (email) => {
-//     return new Promise((resolve, reject) => {
-//         connection.query('SELECT * FROM User WHERE email = ?', [email], (err, results) => {
-//             if (err) {
-//                 return reject(err);
-//             }
-//             resolve(results[0]);
-//         });
-//     });
-// };
-
-
 //A02 Cryptographic Failures
 const findUserByEmail = (email) => {
     return new Promise((resolve, reject) => {
@@ -43,7 +29,7 @@ const findUserByEmail = (email) => {
     });
 };
 
-// //SQL Injection
+// //A03 SQL Injection
 // const findUser = (email, password) => {
 //     return new Promise((resolve, reject) => {
 //         const query = `SELECT * FROM user WHERE email = '${email}' AND password = '${password}'`;
