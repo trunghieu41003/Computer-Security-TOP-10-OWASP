@@ -59,7 +59,7 @@ const findUserByEmail = (email) => {
 //Prevent SQL Injection
 const findUser = (email, password) => {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM User WHERE email = ? AND password = ?', [email, password], (err, results) => {
+        connection.query('SELECT * FROM user WHERE email = ? AND password = ?', [email, password], (err, results) => {
             if (err) {
                 return reject(err);
             }
