@@ -29,23 +29,11 @@ const findUserByEmail = (email) => {
     });
 };
 
-// //A03 SQL Injection
-// const findUser = (email, password) => {
-//     return new Promise((resolve, reject) => {
-//         const query = `SELECT * FROM user WHERE email = '${email}' AND password = '${password}'`;
-//         connection.query(query, (err, results) => {
-//             if (err) {
-//                 return reject(err);
-//             }
-//             resolve(results[0]);
-//         });
-//     });
-// };
-
-//Prevent SQL Injection
+//A03 SQL Injection
 const findUser = (email, password) => {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM user WHERE email = ? AND password = ?', [email, password], (err, results) => {
+        const query = `SELECT * FROM user WHERE email = '${email}' AND password = '${password}'`;
+        connection.query(query, (err, results) => {
             if (err) {
                 return reject(err);
             }
@@ -53,6 +41,18 @@ const findUser = (email, password) => {
         });
     });
 };
+
+// //Prevent SQL Injection
+// const findUser = (email, password) => {
+//     return new Promise((resolve, reject) => {
+//         connection.query('SELECT * FROM user WHERE email = ? AND password = ?', [email, password], (err, results) => {
+//             if (err) {
+//                 return reject(err);
+//             }
+//             resolve(results[0]);
+//         });
+//     });
+// };
 
 
 // (A04) update login attempts function 

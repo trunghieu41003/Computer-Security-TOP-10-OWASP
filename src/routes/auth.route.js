@@ -11,21 +11,26 @@ router.post("/user", authenticateUser, (req, res) => {
 
 
 router.post('/users/signup', userController.signUp);
+
+//Prevent A05
 router.post('/users/login', userController.logIn);
-//A05 expose information on url
+
+// //A05 expose information on url
 // router.get('/users/login', userController.logIn);
+
 router.post('/users/logout', (req, res) => {
 
     res.status(200).json({ message: 'Logout thành công' });
 });
-// Thêm route cho admin
-// router.get("/admin", authenticateAdmin, (req,res) =>{
-//     res.status(200).json({ message: 'Welcome Admin', user: req.user });
-// })
-//A05 REMOVE 'authenticateAdmin' middleware to bypass admin check
-router.get("/admin", (req, res) => {
-    res.status(200).json({ message: 'Welcome Admin' });
-});
+// //Prevent A01 Thêm route cho admin
+router.get("/admin", authenticateAdmin, (req, res) => {
+    res.status(200).json({ message: 'Welcome Admin', user: req.user });
+})
+//A01 REMOVE 'authenticateAdmin' middleware to bypass admin check
+// router.get("/admin", (req, res) => {
+//     res.status(200).json({ message: 'Welcome Admin' });
+// });
+
 router.get("/user", authenticateUser, (req, res) => {
     res.status(200).json({ message: 'Welcome User', user: req.user });
 })

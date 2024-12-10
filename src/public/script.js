@@ -31,18 +31,19 @@ async function logIn(event) {
     const password = document.getElementById('loginPassword').value;
 
     try {
+        // Prevent A05
         const response = await fetch('http://localhost:3000/users/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
         });
-        //A05 expose information on url
+        // //A05 expose information on url
         // const response = await fetch(`http://localhost:3000/users/login?email=${email}&password=${password}`)
 
         const data = await response.json();
         if (response.ok) {
-            localStorage.setItem('jwtToken',data.token)
-            window.location.href="user.html"
+            localStorage.setItem('jwtToken', data.token)
+            window.location.href = "user.html"
             alert('Đăng nhập thành công!');
         } else {
             alert(`Đăng nhập thất bại: ${data.message}`);
@@ -56,7 +57,7 @@ async function logIn(event) {
 document.getElementById('signupForm').addEventListener('submit', signUp);
 document.getElementById('loginForm').addEventListener('submit', logIn);
 // Toggle between login and signup forms
-document.getElementById('signupLink').addEventListener('click', function(event) {
+document.getElementById('signupLink').addEventListener('click', function (event) {
     event.preventDefault();
     document.getElementById('loginForm').style.display = 'none';
     document.getElementById('signupForm').style.display = 'flex';
@@ -64,7 +65,7 @@ document.getElementById('signupLink').addEventListener('click', function(event) 
     document.getElementById('signupTab').classList.add('active');
 });
 
-document.getElementById('loginLink').addEventListener('click', function(event) {
+document.getElementById('loginLink').addEventListener('click', function (event) {
     event.preventDefault();
     document.getElementById('signupForm').style.display = 'none';
     document.getElementById('loginForm').style.display = 'flex';
@@ -72,14 +73,14 @@ document.getElementById('loginLink').addEventListener('click', function(event) {
     document.getElementById('loginTab').classList.add('active');
 });
 
-document.getElementById('loginTab').addEventListener('click', function() {
+document.getElementById('loginTab').addEventListener('click', function () {
     document.getElementById('signupForm').style.display = 'none';
     document.getElementById('loginForm').style.display = 'flex';
     this.classList.add('active');
     document.getElementById('signupTab').classList.remove('active');
 });
 
-document.getElementById('signupTab').addEventListener('click', function() {
+document.getElementById('signupTab').addEventListener('click', function () {
     document.getElementById('loginForm').style.display = 'none';
     document.getElementById('signupForm').style.display = 'flex';
     this.classList.add('active');
@@ -92,7 +93,7 @@ function updateFormTitle(title) {
 }
 
 // Toggle giữa các form login và signup
-document.getElementById('signupLink').addEventListener('click', function(event) {
+document.getElementById('signupLink').addEventListener('click', function (event) {
     event.preventDefault();
     document.getElementById('loginForm').style.display = 'none';
     document.getElementById('signupForm').style.display = 'flex';
@@ -101,7 +102,7 @@ document.getElementById('signupLink').addEventListener('click', function(event) 
     updateFormTitle("Signup Form"); // Cập nhật thẻ h1
 });
 
-document.getElementById('loginLink').addEventListener('click', function(event) {
+document.getElementById('loginLink').addEventListener('click', function (event) {
     event.preventDefault();
     document.getElementById('signupForm').style.display = 'none';
     document.getElementById('loginForm').style.display = 'flex';
@@ -110,7 +111,7 @@ document.getElementById('loginLink').addEventListener('click', function(event) {
     updateFormTitle("Login Form"); // Cập nhật thẻ h1
 });
 
-document.getElementById('loginTab').addEventListener('click', function() {
+document.getElementById('loginTab').addEventListener('click', function () {
     document.getElementById('signupForm').style.display = 'none';
     document.getElementById('loginForm').style.display = 'flex';
     this.classList.add('active');
@@ -118,7 +119,7 @@ document.getElementById('loginTab').addEventListener('click', function() {
     updateFormTitle("Login Form"); // Cập nhật thẻ h1
 });
 
-document.getElementById('signupTab').addEventListener('click', function() {
+document.getElementById('signupTab').addEventListener('click', function () {
     document.getElementById('loginForm').style.display = 'none';
     document.getElementById('signupForm').style.display = 'flex';
     this.classList.add('active');

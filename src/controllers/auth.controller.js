@@ -42,12 +42,17 @@ const signUp = async (req, res) => {
 // Xử lý đăng nhập
 const logIn = async (req, res) => {
     const { email, password } = req.body;
+    //A05
+    //const { email, password } = req.query;
     try {
-        // // Kiểm tra xem người dùng có tồn tại không
+        // // A03 Kiểm tra xem người dùng có tồn tại không
         // const user = await usermodel.findUser(email, password);
         // if (!user) {
         //     return res.status(404).json({ message: 'Email hoặc Password không hợp lệ' });
         // }
+
+        //A02
+        console.log(req.body);
         const user = await usermodel.findUserByEmail(email);
         if (!user) {
             return res.status(404).json({ message: 'Email không tồn tại' });
@@ -122,19 +127,45 @@ const logout = (req, res) => {
     });
 };
 
-const authenticateAdmin = (req, res, next) => {
-    // Assume the JWT is passed in Authorization header as Bearer token
-    const token = req.headers['authorization'] && req.headers['authorization'].split(' ')[1];
-    if (!token) return res.status(401).json({ message: 'Token not provided' });
+const authenticateAdmin = async (req, res, next) => {
+    try {
+        // Assume the JWT is passed in Authorization header as Bearer token
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(' ')[1];
+        if (!token) {
+            return res.status(401).json({ message: 'Token not provided' });
+        }
 
-    // Verify token and check if the user is an admin
-    jwt.verify(token, 'secret_key', (err, user) => {
-        if (err) return res.status(403).json({ message: 'Forbidden' });
-        if (user.role !== 'admin') return res.status(403).json({ message: 'Access denied: Admins only' });
+        // Verify token
+        const user = jwt.verify(token, 'secret_key');
+        if (!user) {
+            return res.status(403).json({ message: 'Forbidden' });
+        }
 
-        req.user = user; // Attach user info to request object
+        // Find user in the database
+        const user1 = await usermodel.findUserByEmail(user.email);
+        console.log(user1)
+        if (!user1) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Check if user is an admin
+        if (user1.role !== 'admin') {
+            return res.status(403).json({ message: 'Access denied: Admins only' });
+        }
+
+        // Attach userId to the request
+        if (req.method === 'GET') {
+            req.query.userId = user.userId;
+        } else {
+            req.body.userId = user.userId;
+        }
+
         next();
-    });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
 };
 const authenticateUser = async (req, res, next) => {
     const { token } = req.body;
