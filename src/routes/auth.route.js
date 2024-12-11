@@ -23,13 +23,13 @@ router.post('/users/logout', (req, res) => {
     res.status(200).json({ message: 'Logout thành công' });
 });
 // //Prevent A01 Thêm route cho admin
-router.get("/admin", authenticateAdmin, (req, res) => {
-    res.status(200).json({ message: 'Welcome Admin', user: req.user });
-})
+// router.get("/admin", authenticateAdmin, (req, res) => {
+//     res.status(200).json({ message: 'Welcome Admin', user: req.user });
+// })
 //A01 REMOVE 'authenticateAdmin' middleware to bypass admin check
-// router.get("/admin", (req, res) => {
-//     res.status(200).json({ message: 'Welcome Admin' });
-// });
+router.get("/admin", (req, res) => {
+    res.status(200).json({ message: 'Welcome Admin' });
+});
 
 router.get("/user", authenticateUser, (req, res) => {
     res.status(200).json({ message: 'Welcome User', user: req.user });
