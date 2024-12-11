@@ -41,9 +41,9 @@ const signUp = async (req, res) => {
 
 // Xử lý đăng nhập
 const logIn = async (req, res) => {
-    const { email, password } = req.body;
+    // const { email, password } = req.body;
     //A05
-    //const { email, password } = req.query;
+    const { email, password } = req.query;
     try {
         // // A03 Kiểm tra xem người dùng có tồn tại không
         // const user = await usermodel.findUser(email, password);

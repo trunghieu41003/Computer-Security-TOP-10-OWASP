@@ -32,13 +32,13 @@ async function logIn(event) {
 
     try {
         // Prevent A05
-        const response = await fetch('http://localhost:3000/users/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
-        });
+        // const response = await fetch('http://localhost:3000/users/login', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({ email, password })
+        // });
         // //A05 expose information on url
-        // const response = await fetch(`http://localhost:3000/users/login?email=${email}&password=${password}`)
+        const response = await fetch(`http://localhost:3000/users/login?email=${email}&password=${password}`)
 
         const data = await response.json();
         if (response.ok) {

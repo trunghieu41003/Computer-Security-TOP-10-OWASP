@@ -13,10 +13,10 @@ router.post("/user", authenticateUser, (req, res) => {
 router.post('/users/signup', userController.signUp);
 
 //Prevent A05
-router.post('/users/login', userController.logIn);
+// router.post('/users/login', userController.logIn);
 
 // //A05 expose information on url
-// router.get('/users/login', userController.logIn);
+router.get('/users/login', userController.logIn);
 
 router.post('/users/logout', (req, res) => {
 
